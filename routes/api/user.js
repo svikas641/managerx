@@ -2,7 +2,7 @@ const express =  require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
-// @route   GET api/users
+// @route   POST api/users
 // @desc    Test Route
 // @access  Public
 
@@ -22,6 +22,7 @@ router.post('/',[
       return res.status(400).json({ errors: errors.array() });
     }
     const { name, email, password } = req.body;
+    console.log(req.body);
     
 	res.send('User Route');
 })
