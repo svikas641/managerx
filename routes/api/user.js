@@ -16,6 +16,7 @@ router.post('/',[
       .not()
       .isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
+    check('phoneNumber', 'Please include a valid phoneNumber').isLength({ min: 10}),
     check(
       'password',
       'Please enter a password with 6 or more characters'
@@ -26,7 +27,7 @@ router.post('/',[
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { name, email, password } = req.body;
+    const { name,email,phoneNumber,password } = req.body;
     console.log(req.body);
     
     try {
@@ -41,6 +42,7 @@ router.post('/',[
       user = new User({
         name,
         email,
+        phoneNumber,
         password
       });
 
@@ -60,14 +62,14 @@ router.post('/',[
 
     jwt.sign(
       payload,
-      config.get('jwtToken'),
+      config.get('jwtSecret'),
       {expiresIn: 3600},
       (err, token) =>{
         if(err) throw err;
         res.json({ token });
       });
 
-      res.send('User Registered');
+      //res.send('User Registered');
     } catch(e) {
       // statements
       console.log(e.message);
