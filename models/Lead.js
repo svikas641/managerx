@@ -6,6 +6,10 @@ const LeadSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user'
   },
+  companyName: {
+            type: String,
+            required: true
+          },
   clientName: {
             type: String,
             required: true
@@ -26,54 +30,35 @@ const LeadSchema = new Schema({
     type: Number,
     required: true
   },
-  // clientProfile1:[{
-  //           clientName: {
-  //           type: String,
-  //           required: true
-  //         },
-  //         clientEmail: {
-  //           type: String,
-  //           required: true
-  //         },
-  //         clientPhoneNumber: {
-  //           type: Number,
-  //           required: true
-  //         }
-  //       }],
-  // clientProfile2:[{
-  //         clientName: {
-  //         type: String
-  //       },
-  //       clientEmail: {
-  //         type: String
-  //       },
-  //       clientPhoneNumber: {
-  //         type: Number
-  //       }
-  //     }],
-  // clientProfile3:[{
-  //         clientName: {
-  //         type: String
-  //       },
-  //       clientEmail: {
-  //         type: String
-  //       },
-  //       clientPhoneNumber: {
-  //         type: Number
-  //       }
-  //     }],
-  commentBox: {
-    type: String,
-    required: true
-  },
-  status:{
-    type: String,
-    required: true
-  },
   salesPerson:{
     type: String,
     required: true
   },
+  visits:[
+  { 
+      commentBox: {
+        type: String,
+        required: true
+      },
+      status:{
+        type: String,
+        required: true
+      },
+      clientName: {
+        type: String
+      },
+      clientEmail: {
+        type: String
+      },
+      clientPhoneNumber: {
+        type: Number
+      },
+      date: {
+        type: Date,
+        default: Date.now
+      }
+  }
+],
   date: {
     type: Date,
     default: Date.now
