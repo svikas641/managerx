@@ -6,6 +6,7 @@ const { check, validationResult } = require('express-validator');
 const Lead = require('../../models/Lead');
 const User = require('../../models/User');
 
+// TODO: VALIDATION
 
 // @route   POST api/lead/
 // @desc    add a new lead
@@ -17,13 +18,12 @@ router.post('/',auth, async (req,res)=>{
 
       const newLead = new Lead({
         user: req.user.id,
+        companyName: req.body.companyName,
         clientName: req.body.clientName,
         clientEmail: req.body.clientEmail,
         clientPhoneNumber: req.body.clientPhoneNumber,
         clientAddress: req.body.clientAddress,
         pincode: req.body.pincode,
-        commentBox: req.body.commentBox,
-        status: req.body.status,
         salesPerson: user.name
       });
 
@@ -99,23 +99,27 @@ router.post(
   async (req, res) => {
     try {
       const user = await User.findById(req.user.id).select('-password');
-      const lead = await Lead.updateOne(
-      	{_id: req.params.id},
-      	{
-      		$set:{
-      			commentBox: req.body.commentBox,
-      			status: req.body.status
-      		},
-      		$currentDate: { lastModified: true }
-      	});
+      const lead = await Lead.findById(req.params.id);
 
-      res.json('Feedback Added Successfully');
+	     const newVisit = {
+			commentBox: req.body.commentBox,
+			status: req.body.status,
+			clientName: req.body.clientName,
+	        clientEmail: req.body.clientEmail,
+	        clientPhoneNumber: req.body.clientPhoneNumber
+	     }
+
+	     lead.visits.unshift(newVisit);
+
+      await lead.save();
+
+      res.json(lead.visits);
+
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
     }
   }
 );
-
 
 module.exports = router;
