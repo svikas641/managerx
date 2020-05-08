@@ -31,7 +31,8 @@ const {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createLead(formData,history)
+    createLead(formData,history);
+    setFormData(initialState);
   };
 
 	return (

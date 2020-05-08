@@ -43,7 +43,7 @@ export const createLead = (formData, history) => async dispatch => {
 		})
 
 		dispatch(setAlert('Lead Created', 'success'));
-		history.push('/dashboard')
+		history.push('/create-lead')
 	} catch(err) {
 		dispatch({
       type: LEAD_ERROR,

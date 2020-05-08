@@ -29,6 +29,7 @@ const {
           e.preventDefault();
           addVisit(leadId, formData );
           console.log(formData)
+          setFormData(initialState);
         };
   return (
     <div className='post-form'>
