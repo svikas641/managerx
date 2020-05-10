@@ -46,7 +46,7 @@ router.get('/pending',auth, async (req,res)=>{
 	try {
 		const leads = await Lead.find({
 			user: req.user.id,
-			status: { $ne: "Done" }
+			status: { $ne: "Done" || "Close Lead" }
 		});
 		res.json(leads);
 	} catch(e) {
@@ -61,7 +61,7 @@ router.get('/pending',auth, async (req,res)=>{
 
 router.get('/',auth, async (req,res)=>{
 	try {
-		const leads = await Lead.find({user: req.user.id});
+		const leads = await Lead.find({user: req.user.id}).sort({ date: -1 });
 		res.json(leads);
 	} catch(e) {
 		console.error(e.message);
@@ -119,12 +119,20 @@ router.post(
 
       switch(template) {
         case 'Met':
-          var htmlTemplate = fs.readFileSync("./routes/api/email_templates/met.html").toString();
-          subject = "Thank you: For your valuable time.";
+          // var htmlTemplate = fs.readFileSync("./routes/api/email_templates/met.html").toString();
+          // subject = "Thank you: For your valuable time.";
+          console.log('Met')
           break;
         case 'Not met':
-          var htmlTemplate = fs.readFileSync("./routes/api/email_templates/not_met.html").toString();
-          subject = "Meeting Not held.";
+          // var htmlTemplate = fs.readFileSync("./routes/api/email_templates/not_met.html").toString();
+          // subject = "Meeting Not held.";
+          console.log('Not met')
+          break;
+        case 'Close Lead':
+          console.log('Lead Closed')
+          break;
+        case 'Done':
+          console.log('Lead Done')
           break;
         default:
           console.log('None Selected')
@@ -134,9 +142,9 @@ router.post(
       const toName = req.body.clientName;
       const fromEmail = user.email;
       const fromName = user.name;
-      const contentValue = htmlTemplate;
+      //const contentValue = htmlTemplate;
 
-      sendEmail(toEmail,toName,subject,fromEmail,fromName,contentValue);
+      //sendEmail(toEmail,toName,subject,fromEmail,fromName,contentValue);
 
 	   lead.visits.unshift(newVisit);
       await lead.save();
