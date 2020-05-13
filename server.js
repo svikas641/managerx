@@ -14,6 +14,7 @@ app.use('/api/users',require('./routes/api/user'));
 app.use('/api/auth',require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/lead',require('./routes/api/lead'));
+app.use('/api/map',require('./routes/api/distance'));
 
 
 // Serve Static assets in production
