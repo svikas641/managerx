@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import CreateLead from './components/lead-form/CreateLead';
+import CheckIn from './components/checkin-feedback/CheckIn';
 //import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
@@ -44,6 +45,7 @@ return (
               <PrivateRoute exact path="/create-lead" component={ CreateLead } />
               <PrivateRoute exact path="/leads-log" component={ Leads } />
               <PrivateRoute exact path="/leads-log/:id" component={ Lead } />
+              <PrivateRoute exact path="/checkin-feedback" component={ CheckIn } />
             </Switch>
           </section>
         </Fragment>

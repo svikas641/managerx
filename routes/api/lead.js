@@ -38,7 +38,7 @@ router.post('/',auth, async (req,res)=>{
 	}
 });
 
-// @route   GET api/lead/me
+// @route   GET api/lead/pending
 // @desc    get all pending leads by a user
 // @access  Private
 
@@ -46,7 +46,7 @@ router.get('/pending',auth, async (req,res)=>{
 	try {
 		const leads = await Lead.find({
 			user: req.user.id,
-			status: { $ne: "Done" || "Close Lead" }
+      $and: [ { finalStatus : { $ne: "Lead closed" }}, { finalStatus: { $ne: "Done" }}]
 		});
 		res.json(leads);
 	} catch(e) {

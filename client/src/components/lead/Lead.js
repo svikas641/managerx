@@ -17,8 +17,11 @@ const Lead = ({ getLead, lead: { lead, loading }, match }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <Link to="/leads-log" className="btn">
-        Back To Leads
+      <Link to="/leads-log" className="btn btn-dark my-1">
+        All Leads
+      </Link>
+      <Link to="/checkin-feedback" className="btn btn-dark my-1">
+        Pending Leads
       </Link>
       <LeadItem lead={lead} fullContent={true} />
       <VisitForm leadId={lead._id} />

@@ -27,6 +27,23 @@ export const getLeads = () => async dispatch => {
   }
 };
 
+// Get Pending Leads
+export const getPendingLeads = () => async dispatch => {
+  try {
+    const res = await axios.get('/api/lead/pending');
+
+    dispatch({
+      type: GET_LEADS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: LEAD_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
 // Create a Lead
 export const createLead = (formData, history) => async dispatch => {
 	try {

@@ -9,10 +9,7 @@ const VisitItem = ({
   auth
 }) => (
     <div>
-    <div className='bg-primary p'>
-        <h3>Visits</h3>
-      </div>
-  <div className='visit bg-white p-1 my-1'>
+      <div className='visit bg-white p-1 my-1'>
       <div>
       <ul className="list-group list-group-flush">
           <li> Status : {status}</li>

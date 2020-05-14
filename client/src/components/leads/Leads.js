@@ -16,7 +16,7 @@ const Leads = ({ getLeads, lead: { leads, loading } }) => {
 	return loading ? (<Spinner />) : (
 		<Fragment>
       <h1 className="large text-primary">All Leads</h1>
-      <Link to="/dashboard" className="btn">
+      <Link to="/dashboard" className="btn btn-dark my-1">
         Back To Dashboard
       </Link>
       {' '}
