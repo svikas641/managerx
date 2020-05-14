@@ -119,16 +119,16 @@ router.post(
 
       switch(template) {
         case 'Met':
-          // var htmlTemplate = fs.readFileSync("./routes/api/email_templates/met.html").toString();
-          // subject = "Thank you: For your valuable time.";
+          var htmlTemplate = fs.readFileSync("./routes/api/email_templates/met.html").toString();
+          subject = "Thank you: For your valuable time.";
           lead.visits.unshift(newVisit);
           await lead.save();
           res.json(lead.visits);
           console.log('Met')
           break;
         case 'Not met':
-          // var htmlTemplate = fs.readFileSync("./routes/api/email_templates/not_met.html").toString();
-          // subject = "Meeting Not held.";
+          var htmlTemplate = fs.readFileSync("./routes/api/email_templates/not_met.html").toString();
+          subject = "Meeting Not held.";
           lead.visits.unshift(newVisit);
           await lead.save();
           res.json(lead.visits);
@@ -158,9 +158,9 @@ router.post(
       const toName = req.body.clientName;
       const fromEmail = user.email;
       const fromName = user.name;
-      //const contentValue = htmlTemplate;
+      const contentValue = htmlTemplate;
 
-      //sendEmail(toEmail,toName,subject,fromEmail,fromName,contentValue);
+      sendEmail(toEmail,toName,subject,fromEmail,fromName,contentValue);
 
 	  
     } catch (err) {
