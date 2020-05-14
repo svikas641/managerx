@@ -8,17 +8,24 @@ const VisitItem = ({
   visit: { _id, status, commentBox, clientName, clientEmail, clientPhoneNumber, date },
   auth
 }) => (
-  <div className='post bg-white p-1 my-1'>
     <div>
-      <p className='my-1'> Status : {status}</p>
-      <p className='my-1'> Comment : {commentBox}</p>
-      <p className='my-1'> Client Name : {clientName}</p>
-      <p className='my-1'> Client Email :  {clientEmail}</p>
-      <p className='my-1'> Client Phone Number : {clientPhoneNumber}</p>
-      <p className='post-date'>
+    <div className='bg-primary p'>
+        <h3>Visits</h3>
+      </div>
+  <div className='visit bg-white p-1 my-1'>
+      <div>
+      <ul className="list-group list-group-flush">
+          <li> Status : {status}</li>
+          <li> Comment : {commentBox}</li>
+          <li>Client Name : {clientName}</li>
+          <li>Client Email :  {clientEmail}</li>
+          <li>Client Phone Number : {clientPhoneNumber}</li>
+          <li>
         Visited on <Moment format='DD/MM/YYYY'>{date}</Moment>
-      </p>
-    </div>
+      </li>
+    </ul>
+      </div>
+  </div>
   </div>
 );
 
