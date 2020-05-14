@@ -17,7 +17,7 @@ app.use('/api/lead',require('./routes/api/lead'));
 app.use('/api/map',require('./routes/api/distance'));
 
 
-Serve Static assets in production
+//Serve Static assets in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
   app.use(express.static('client/build'));
