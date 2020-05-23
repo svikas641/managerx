@@ -1,57 +1,40 @@
-import React, { Fragment, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
-import CreateLead from './components/lead-form/CreateLead';
-import CheckIn from './components/checkin-feedback/CheckIn';
-//import Footer from './components/layout/Footer';
-import Landing from './components/layout/Landing';
-import Register from './components/auth/Register';
-import Login from './components/auth/Login';
-import Alert from './components/layout/Alert';
-import Leads from './components/leads/Leads';
-import Lead from './components/lead/Lead';
-import Dashboard from './components/dashboard/Dashboard';
-import PrivateRoute from './components/routing/PrivateRoute';
+import React, { Fragment, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Navbar from "./components/layout/Navbar";
+import Landing from "./components/layout/Landing";
+import Routes from "./components/routing/Routes";
+import Map from "./components/layout/Map";
 // Redux
-import { Provider } from 'react-redux';
-import store from './Store';
-import { loadUser } from './actions/auth';
-import setAuthToken from './utils/setAuthToken';
+import { Provider } from "react-redux";
+import store from "./Store";
+import { loadUser } from "./actions/auth";
+import setAuthToken from "./utils/setAuthToken";
 
-import './App.css';
+import "./App.css";
 
-if(localStorage.token){
-    setAuthToken(localStorage.token);
-  }
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 const App = () => {
-
-  useEffect(()=> {
+  useEffect(() => {
     store.dispatch(loadUser());
-  },[]);
+  }, []);
 
-return (
+  return (
     <Provider store={store}>
       <Router>
         <Fragment>
           <Navbar />
-          <Route exact path="/" component={ Landing } />
-          <section className = 'container'>
-            <Alert />
-            <Switch>
-              <Route exact path="/register" component={ Register } />
-              <Route exact path="/login" component={ Login } />
-              <PrivateRoute exact path="/dashboard" component={ Dashboard } />
-              <PrivateRoute exact path="/create-lead" component={ CreateLead } />
-              <PrivateRoute exact path="/leads-log" component={ Leads } />
-              <PrivateRoute exact path="/leads-log/:id" component={ Lead } />
-              <PrivateRoute exact path="/checkin-feedback" component={ CheckIn } />
-            </Switch>
-          </section>
+          <Switch>
+            <Route exact path="/map" component={Map} />
+            <Route exact path="/" component={Landing} />
+            <Route component={Routes} />
+          </Switch>
         </Fragment>
       </Router>
     </Provider>
-);
+  );
 };
 
 export default App;
