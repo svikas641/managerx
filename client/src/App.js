@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Routes from "./components/routing/Routes";
-import Map from "./components/layout/Map";
+import Map from "./components/map/Map";
 // Redux
 import { Provider } from "react-redux";
 import store from "./Store";
