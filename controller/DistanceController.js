@@ -1,17 +1,23 @@
-const distance =  require('google-distance');
-const config =  require('config');
+const distance = require("google-distance");
+const config = require("config");
 
-module.exports = function DistanceController(origin, destination, mode = 'driving'){
-	distance.apiKey = config.get('distanceMapKey');
+module.exports = function DistanceController(
+	origin,
+	destination,
+	mode = "driving"
+) {
+	distance.apiKey = config.get("distanceMapKey");
 	return new Promise((resolve, reject) => {
-			distance.get({
+		distance.get(
+			{
 				mode: mode,
 				origin: origin,
-				destinations: destination
-			}, (error, data) => {
+				destinations: destination,
+			},
+			(error, data) => {
 				if (error) reject(error);
-
 				resolve(data);
-			});
-		});	
-}
+			}
+		);
+	});
+};
