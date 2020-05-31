@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { connect } from "react-redux";
 import { getPendingLeads } from "../../actions/lead";
 import { getMapData } from "../../actions/map";
+import Spinner from "../layout/Spinner";
 
 const mapContainerStyle = {
   height: "100vh",
@@ -73,8 +74,10 @@ const Map = ({
     );
   }
 
-  return (
-    <div>
+  return loading ? (
+    <Spinner />
+  ) : (
+    <Fragment>
       <Locate />
       <NearestLead />
       <GoogleMap
@@ -113,7 +116,7 @@ const Map = ({
           </InfoWindow>
         )}
       </GoogleMap>
-    </div>
+    </Fragment>
   );
 };
 
